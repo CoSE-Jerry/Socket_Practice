@@ -3,23 +3,23 @@ import socket
 HOST = '' # Server IP or Hostname
 PORT = 12345 # Pick an open Port (1000+ recommended), must match the client sport
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-print 'Socket created'
+print ('Socket created')
 
 #managing error exception
 try:
 	s.bind((HOST, PORT))
 	except socket.error:
-	print 'Bind failed '
+	print ('Bind failed ')
 
 	s.listen(5)
-	print 'Socket awaiting messages'
+	print ('Socket awaiting messages')
 	(conn, addr) = s.accept()
-	print 'Connected'
+	print ('Connected')
 
 # awaiting for message
 while True:
 	data = conn.recv(1024)
-	print 'I sent a message back in response to: ' + data
+	print ('I sent a message back in response to: ' + data)
 	reply = ''
 
 	# process your message
