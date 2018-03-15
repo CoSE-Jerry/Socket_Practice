@@ -3,8 +3,6 @@ import socket
 host = ''
 port = 5560
 
-storedValue = "Yo, what's up?"
-
 def setupServer():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     print("Socket created.")
@@ -18,15 +16,10 @@ def setupServer():
 def setupConnection():
     s.listen(1) # Allows one connection at a time.
     conn, address = s.accept()
-    print("Connected to: " + address[0] + ":" + str(address[1]))
     return conn
 
-def GET():
-    reply = storedValue
-    return reply
-
-def REPEAT(dataMessage):
-    reply = dataMessage[1]
+def CALL():
+    reply = "CONNECTED"
     return reply
 
 def dataTransfer(conn):
@@ -39,17 +32,9 @@ def dataTransfer(conn):
         # from the rest of the data.
         dataMessage = data.split(' ', 1)
         command = dataMessage[0]
-        if command == 'GET':
+        if command == 'CALL':
             reply = GET()
-        elif command == 'REPEAT':
-            reply = REPEAT(dataMessage)
-        elif command == 'EXIT':
-            print("Our client has left us :(")
-            break
-        elif command == 'KILL':
-            print("Our server is shutting down.")
-            s.close()
-            break
+            
         else:
             reply = 'Unknown Command'
         # Send the reply back to the client
