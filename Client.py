@@ -1,15 +1,14 @@
 import socket
 
 HOST = '192.168.137.21' # Enter IP or Hostname of your server
-PORT = 12345 # Pick an open Port (1000+ recommended), must match the server port
+PORT = 5560 # Pick an open Port (1000+ recommended), must match the server port
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((HOST,PORT))
 
 #Lets loop awaiting for your input
 while True:
-	command = raw_input('Enter your command: ')
-	s.send(command)
+	command = input('Enter your command: ')
+	s.send(str.encode(command))
 	reply = s.recv(1024)
-	if reply == 'Terminate':
-		break
-	print (reply)
+	print (reply.decode('utf-8'))
+s.close()
