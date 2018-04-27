@@ -5,8 +5,8 @@ from time import sleep
 
 host = ''
 port = 5560
-title = None
-email = None
+title = ""
+email = ""
 interval = 0
 duration = 0
 
