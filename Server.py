@@ -1,10 +1,12 @@
 import socket
 from picamera import PiCamera
+from threading import Thread
+import time
 
 host = ''
 port = 5560
-interval = 0
-duration = 0
+global interval = 0
+global duration = 0
 
 def setupServer():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -38,7 +40,7 @@ def dataTransfer(conn):
         if command == 'CAM':
             interval = dataMessage[1]
             duration = dataMessage[2]
-            reply = 'Interval '+str(interval) + ' Duration ' + (str)duration
+            reply = 'Interval '+str(interval) + ' Duration ' + str(duration)
             reply = 'Unknown Command'
             
         else:
@@ -48,7 +50,25 @@ def dataTransfer(conn):
         conn.sendall(str.encode(reply))
         print("Data has been sent!")
     conn.close()
-        
+class Hello5Program:  
+    def __init__(self):
+        self._running = True
+
+    def terminate(self):  
+        self._running = False  
+
+    def run(self):
+        global interval, duration
+        while self._running:
+            sleep(2)
+            print("test")
+
+#Create Class
+FiveSecond = Hello5Program()
+#Create Thread
+FiveSecondThread = Thread(target=FiveSecond.run) 
+#Start Thread 
+FiveSecondThread.start()
 
 s = setupServer()
 
