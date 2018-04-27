@@ -53,8 +53,5 @@ def dataTransfer(conn):
 s = setupServer()
 
 while True:
-    try:
-        conn = setupConnection()
-        dataTransfer(conn)
-    except:
-        break
+    conn = setupConnection()
+    dataTransfer(conn)
