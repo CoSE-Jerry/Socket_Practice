@@ -1,6 +1,6 @@
 import socket
-import thread
 from picamera import PiCamera
+from threading import Thread
 
 host = ''
 port = 5560
@@ -34,12 +34,13 @@ def dataTransfer(conn):
         data = data.decode('utf-8')
         # Split the data such that you separate the command
         # from the rest of the data.
-        dataMessage = data.split('-', 2)
+        dataMessage = data.split('-', 1)
         command = dataMessage[0]
         if command == 'CAM':
             interval = dataMessage[1]
             duration = dataMessage[2]
             reply = 'Interval '+str(interval) + ' Duration ' + str(duration)
+            reply = 'Unknown Command'
             
         else:
             reply = 'Unknown Command'
@@ -49,11 +50,23 @@ def dataTransfer(conn):
         print("Data has been sent!")
     conn.close()
 
-def socket_connect( threadName):
-    s = setupServer()
-    while True:
-        conn = setupConnection()
-        dataTransfer(conn)
+class SocketConnect:  
+    def __init__(self):
+        self._running = True
 
-thread.start_new_thread( socket_connect, "Thread_1" )
+    def terminate(self):  
+        self._running = False  
 
+    def run(self):
+        s = setupServer()
+
+        while True:
+            conn = setupConnection()
+            dataTransfer(conn)
+
+#Create Class
+Connect = SocketConnect()
+#Create Thread
+ConnectThread = Thread(target=Connect.run) 
+#Start Thread 
+ConnectThread.start()
