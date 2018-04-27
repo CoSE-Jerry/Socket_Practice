@@ -34,9 +34,15 @@ def dataTransfer(conn):
         # Split the data such that you separate the command
         # from the rest of the data.
         dataMessage = data.split('-', 1)
-        interval = dataMessage[0]
-        duration = dataMessage[1]
-        reply = 'Interval '+interval + ' Duration ' + duration
+        command = dataMessage[0]
+        if command == 'CAM':
+            interval = dataMessage[1]
+            duration = dataMessage[2]
+            reply = 'Interval '+interval + ' Duration ' + duration
+            
+        else:
+            reply = 'Unknown Command'
+            
         # Send the reply back to the client
         conn.sendall(str.encode(reply))
         print("Data has been sent!")

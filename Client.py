@@ -10,3 +10,6 @@ while True:
 	command = input('Enter your command: ')
 	s.send(str.encode(command))
 	reply = s.recv(1024)
+	print (reply.decode('utf-8'))
+s.close()
+s2.close()
