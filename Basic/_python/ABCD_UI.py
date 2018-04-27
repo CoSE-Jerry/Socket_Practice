@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'Demo.ui'
 #
-# Created by: PyQt5 UI code generator 5.9
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -64,7 +64,7 @@ class Ui_Demo(object):
         self.ISD_spinBox.setObjectName("ISD_spinBox")
         self.verticalLayout_2.addWidget(self.ISD_spinBox)
         self.verticalLayoutWidget_2 = QtWidgets.QWidget(self.centralWidget)
-        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(20, 420, 491, 91))
+        self.verticalLayoutWidget_2.setGeometry(QtCore.QRect(20, 420, 491, 101))
         self.verticalLayoutWidget_2.setObjectName("verticalLayoutWidget_2")
         self.verticalLayout_3 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_2)
         self.verticalLayout_3.setContentsMargins(11, 11, 11, 11)
@@ -74,7 +74,6 @@ class Ui_Demo(object):
         self.email.setObjectName("email")
         self.verticalLayout_3.addWidget(self.email)
         self.horizontalLayout = QtWidgets.QHBoxLayout()
-        self.horizontalLayout.setContentsMargins(11, 11, 11, 11)
         self.horizontalLayout.setSpacing(6)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.email_edit = QtWidgets.QLineEdit(self.verticalLayoutWidget_2)
@@ -125,7 +124,7 @@ class Ui_Demo(object):
         self.statusBar.setObjectName("statusBar")
         Demo.setStatusBar(self.statusBar)
         self.menuBar = QtWidgets.QMenuBar(Demo)
-        self.menuBar.setGeometry(QtCore.QRect(0, 0, 530, 21))
+        self.menuBar.setGeometry(QtCore.QRect(0, 0, 530, 19))
         self.menuBar.setObjectName("menuBar")
         self.menuFile = QtWidgets.QMenu(self.menuBar)
         self.menuFile.setObjectName("menuFile")

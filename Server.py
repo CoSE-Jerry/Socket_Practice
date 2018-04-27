@@ -1,7 +1,10 @@
 import socket
+from picamera import PiCamera
 
 host = ''
 port = 5560
+interval = 0
+duration = 0
 
 def setupServer():
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -30,13 +33,10 @@ def dataTransfer(conn):
         data = data.decode('utf-8')
         # Split the data such that you separate the command
         # from the rest of the data.
-        dataMessage = data.split(' ', 1)
-        command = dataMessage[0]
-        if command == 'CALL':
-            reply = GET()
-            
-        else:
-            reply = 'Unknown Command'
+        dataMessage = data.split('-', 1)
+        interval = dataMessage[0]
+        duration = dataMessage[1]
+        reply = 'Interval '+interval + ' Duration ' + duration
         # Send the reply back to the client
         conn.sendall(str.encode(reply))
         print("Data has been sent!")
