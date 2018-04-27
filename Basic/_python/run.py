@@ -63,8 +63,7 @@ class StartImaging(QThread):
 
     def run(self):
 
-        for x in range(-1, 7):
-            print(LowerRunning[x])
+        for x in range(0, 7):
             if(LowerRunning[x]==1):
                 HOST="192.168.1.10"+str(x)
                 print(HOST)
@@ -259,10 +258,8 @@ class MainWindow(QMainWindow, ABCD_UI.Ui_Demo):
         LowerConn = [1] * 8
 
     def Begin_Imaging(self):
-        print("startiamging")
         self.Imaging_Thread = StartImaging()
         self.Imaging_Thread.start()
-        print("startiamging thradu")
 
     def __init__(self):
         super(self.__class__, self).__init__()
