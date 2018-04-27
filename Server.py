@@ -41,7 +41,7 @@ def dataTransfer(conn):
         command = dataMessage[0]
         if command == 'CURR':
             reply = title+"-"+str(interval)+"-"+str(duration)+"-"+email
-        elif command == 'CAM'
+        elif command == 'CAM'：
             reply = "got it" 
         else:
             reply = 'Unknown Command'
