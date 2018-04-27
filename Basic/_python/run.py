@@ -256,6 +256,10 @@ class MainWindow(QMainWindow, ABCD_UI.Ui_Demo):
         UpperConn = [1] * 8
         LowerConn = [1] * 8
 
+    def Begin_Imaging(self):
+        self.Imaging_Thread = StartImaging()
+        self.Imaging_Thread.start()
+
     def __init__(self):
         super(self.__class__, self).__init__()
         self.setupUi(self) # gets defined in the UI file
@@ -265,6 +269,7 @@ class MainWindow(QMainWindow, ABCD_UI.Ui_Demo):
         self.IST_Editor.textChanged.connect(lambda: self.IST_Change())
         self.ICI_spinBox.valueChanged.connect(lambda: self.ICI_Change())
         self.ISD_spinBox.valueChanged.connect(lambda: self.ISD_Change())
+        self.Start_Imaging.clicked.connect(lambda: self.Begin_Imaging())
         
 
 # I feel better having one of these

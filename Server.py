@@ -30,6 +30,7 @@ def CALL():
     return reply
 
 def dataTransfer(conn):
+    global interval, duration, title, email
     # A big loop that sends/receives data until told not to.
     while True:
         # Receive the data
@@ -42,7 +43,12 @@ def dataTransfer(conn):
         if command == 'CURR':
             reply = title+"-"+str(interval)+"-"+str(duration)+"-"+email
         elif command == 'CAM':
-            reply = "got it" 
+            reply = "got it"
+            title = dataMessage[1]
+            interval = dataMessage[2]
+            duration = dataMessage[3]
+            email = dataMessage[4]
+            
         else:
             reply = 'Unknown Command'
             
