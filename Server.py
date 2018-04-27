@@ -43,11 +43,12 @@ def dataTransfer(conn):
         if command == 'CURR':
             reply = title+"-"+str(interval)+"-"+str(duration)+"-"+email
         elif command == 'CAM':
-            reply = "got it"
-            title = dataMessage[1]
-            interval = dataMessage[2]
-            duration = dataMessage[3]
-            email = dataMessage[4]
+            print("allah")
+            #reply = "got it"
+            #title = dataMessage[1]
+            #interval = dataMessage[2]
+            #duration = dataMessage[3]
+            #email = dataMessage[4]
             
         else:
             reply = 'Unknown Command'
