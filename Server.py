@@ -57,7 +57,7 @@ def dataTransfer(conn):
         print("Data has been sent!")
     conn.close()
     
-class Hello5Program:  
+class CameraProgram:  
     def __init__(self):
         self._running = True
 
@@ -71,11 +71,11 @@ class Hello5Program:
             print('Interval '+str(interval) + ' Duration ' + str(duration))
 
 #Create Class
-FiveSecond = Hello5Program()
+Camera = CameraProgram()
 #Create Thread
-FiveSecondThread = Thread(target=FiveSecond.run) 
+CameraThread = Thread(target=Camera.run) 
 #Start Thread 
-FiveSecondThread.start()
+CameraThread.start()
 
 s = setupServer()
 

@@ -21,9 +21,13 @@ LowerRunning = [0] * 8
 
 interval=0
 duration=0
+loadinterval=0
+loadduration=0
 total=0
 title=""
+loadtitle=""
 email="temp"
+loademail=""
 
 
 # This is our window from QtCreator
@@ -39,19 +43,26 @@ class ConnectionUpdate(QThread):
         self._running = False
 
     def run(self):
-
+        global loadtitle, loadinterval, loadduration,loademail
         for x in range(0, 7):
             if(LowerStat[x]==1):
                 HOST="192.168.1.10"+str(x)
-        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        try:
-            s.connect((HOST,PORT))
-            s.send(str.encode("CURR"))
-            reply = s.recv(1024)
-            print (reply.decode('utf-8'))
-            s.close()
-        except:
-            print("nope")
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                try:
+                    s.connect((HOST,PORT))
+                    s.send(str.encode("CURR"))
+                    reply = s.recv(1024)
+                    reply = reply.decode('utf-8')
+                    dataMessage = reply.split('-', 4)
+                    
+                    loadtitle = dataMessage[0]
+                    print("currnet title:"+loadtitle)
+                    loadinterval = dataMessage[1]
+                    loadduration = dataMessage[2]
+                    #email = dataMessage[3]
+                    s.close()
+                except:
+                    print("nopey")
 
 class StartImaging(QThread):
     
@@ -66,6 +77,20 @@ class StartImaging(QThread):
         for x in range(0, 7):
             if(LowerRunning[x]==1):
                 HOST="192.168.1.10"+str(x)
+                print(HOST)
+                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                try:
+                    s.connect((HOST,PORT))
+                    cmd = "CAM-"+title+"-"+str(interval)+"-"+str(duration)+"-"+email
+                    s.send(str.encode(cmd))
+                    reply = s.recv(1024)
+                    print (reply.decode('utf-8'))
+                    s.close()
+                except:
+                    print("nope")
+                    
+            if(UpperRunning[x]==1):
+                HOST="192.168.1.20"+str(x)
                 print(HOST)
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 try:
@@ -256,6 +281,9 @@ class MainWindow(QMainWindow, ABCD_UI.Ui_Demo):
                 exec(cmd)
         UpperConn = [1] * 8
         LowerConn = [1] * 8
+        self.IST_Editor.setText(loadtitle)
+        self.ICI_spinBox.setValue(int(loadinterval))
+        self.ISD_spinBox.setValue(int(loadduration))
 
     def Begin_Imaging(self):
         self.Imaging_Thread = StartImaging()
