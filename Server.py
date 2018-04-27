@@ -38,7 +38,8 @@ def dataTransfer(conn):
         if command == 'CAM':
             interval = dataMessage[1]
             duration = dataMessage[2]
-            reply = 'Interval '+interval + ' Duration ' + duration
+            #reply = 'Interval '+interval + ' Duration ' + duration
+            reply = 'Unknown Command'
             
         else:
             reply = 'Unknown Command'
