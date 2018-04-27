@@ -40,7 +40,7 @@ def dataTransfer(conn):
         dataMessage = data.split('-', 1)
         command = dataMessage[0]
         if command == 'CURR':
-            reply = title+"-"+str(interval)+"-"+str(duration)+"email"
+            reply = title+"-"+str(interval)+"-"+str(duration)+"-"+email
         #elif command == ''
         
         else:
