@@ -66,9 +66,10 @@ class CameraProgram:
 
     def run(self):
         global interval, duration
-        while self._running:
-            sleep(2)
-            print('Interval '+str(interval) + ' Duration ' + str(duration))
+        with PiCamera() as camera:
+            camera.resolution = (2464,2464)
+            camera._set_rotation(180)
+            camera.capture("../snapshot.jpg")
 
 #Create Class
 Camera = CameraProgram()
@@ -85,5 +86,5 @@ while True:
             conn = setupConnection()
             dataTransfer(conn)
         except socket.error as msg:
-            print("dead")
+            print("disconnect")
         
