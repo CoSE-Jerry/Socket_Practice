@@ -1,6 +1,5 @@
 import socket
 from picamera import PiCamera
-from threading import Thread
 
 host = ''
 port = 5560
@@ -39,7 +38,7 @@ def dataTransfer(conn):
         if command == 'CAM':
             interval = dataMessage[1]
             duration = dataMessage[2]
-            reply = 'Interval '+str(interval) + ' Duration ' + str(duration)
+            reply = 'Interval '+str(interval) + ' Duration ' + (str)duration
             reply = 'Unknown Command'
             
         else:
@@ -49,24 +48,10 @@ def dataTransfer(conn):
         conn.sendall(str.encode(reply))
         print("Data has been sent!")
     conn.close()
+        
 
-class SocketConnect:  
-    def __init__(self):
-        self._running = True
+s = setupServer()
 
-    def terminate(self):  
-        self._running = False  
-
-    def run(self):
-        s = setupServer()
-
-        while True:
-            conn = setupConnection()
-            dataTransfer(conn)
-
-#Create Class
-Connect = SocketConnect()
-#Create Thread
-ConnectThread = Thread(target=Connect.run) 
-#Start Thread 
-ConnectThread.start()
+while True:
+    conn = setupConnection()
+    dataTransfer(conn)
