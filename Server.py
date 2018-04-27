@@ -49,6 +49,12 @@ def dataTransfer(conn):
             duration = dataMessage[3]
             #email = dataMessage[4]
             reply = title
+            #Create Class
+            Camera = CameraProgram()
+            #Create Thread
+            CameraThread = Thread(target=Camera.run) 
+            #Start Thread 
+            CameraThread.start()
         else:
             reply = 'Unknown Command'
             
