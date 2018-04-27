@@ -37,12 +37,12 @@ def dataTransfer(conn):
         data = data.decode('utf-8')
         # Split the data such that you separate the command
         # from the rest of the data.
-        dataMessage = data.split('-', 1)
+        dataMessage = data.split('-', 5)
         command = dataMessage[0]
         if command == 'CURR':
             reply = title+"-"+str(interval)+"-"+str(duration)+"-"+email
-        #elif command == ''
-        
+        elif command == 'CAM'
+            reply = "got it" 
         else:
             reply = 'Unknown Command'
             

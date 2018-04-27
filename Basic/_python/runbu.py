@@ -15,15 +15,7 @@ UpperStat = [0] * 8
 LowerStat = [0] * 8
 UpperConn = [1] * 8
 LowerConn = [1] * 8
-
-UpperRunning = [0] * 8
-LowerRunning = [0] * 8
-
-interval=0
-duration=0
-total=0
 title=""
-email="temp"
 
 
 # This is our window from QtCreator
@@ -53,30 +45,6 @@ class ConnectionUpdate(QThread):
         except:
             print("nope")
 
-class StartImaging(QThread):
-    
-    def __init__(self):
-        QThread.__init__(self)
-
-    def __del__(self):
-        self._running = False
-
-    def run(self):
-
-        for x in range(0, 7):
-            if(LowerRunning[x]==1):
-                HOST="192.168.1.10"+str(x)
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                try:
-                    s.connect((HOST,PORT))
-                    cmd = "CAM-"+title+"-"+str(interval)+"-"+str(duration)+"-"+email
-                    s.send(str.encode(cmd))
-                    reply = s.recv(1024)
-                    print (reply.decode('utf-8'))
-                    s.close()
-                except:
-                    print("nope")
-
 class PingConnection(QThread):
     
     def __init__(self):
@@ -86,7 +54,7 @@ class PingConnection(QThread):
         self._running = False
 
     def run(self):
-        global LowerConn,Upperconn,UpperRunning,LowerRunning
+        global LowerConn,Upperconn
         for x in range(0, 7):
             if(LowerStat[x]==1):
                 HOST="192.168.1.10"+str(x)
@@ -94,7 +62,6 @@ class PingConnection(QThread):
                 try:
                     s.connect((HOST,PORT))
                     s.close()
-                    LowerRunning[x]=1
                     print("connection successful" + HOST)
                 except:
                     LowerConn[x]=0
@@ -106,10 +73,9 @@ class PingConnection(QThread):
                 try:
                     s.connect((HOST,PORT))
                     s.close()
-                    UpperRunning[x]=1
                     print("connection successful" + HOST)
                 except:
-                    UpperConn[x]=0
+                    LowerConn[x]=0
                     print("connection failed" + HOST)
         
 class PingLower(QThread):
@@ -160,30 +126,6 @@ class MainWindow(QMainWindow, ABCD_UI.Ui_Demo):
         if(len(self.IST_Editor.text())==0):
             self.ICI_spinBox.setEnabled(False)
             self.ISD_spinBox.setEnabled(False)
-            self.Start_Imaging.setEnabled(False)
-
-    def ICI_Change(self):
-        global interval, total
-        interval = self.ICI_spinBox.value()
-        self.ISD_spinBox.setEnabled(True)
-        if(interval == 0):
-            self.ISD_spinBox.setEnabled(False)
-        if(interval!= 0):
-            total = int(duration/interval)
-            if(total>0 and len(email)!=0):
-                self.Start_Imaging.setEnabled(True)
-            else:
-                self.Start_Imaging.setEnabled(False)
-                
-    def ISD_Change(self):
-        global duration, total
-        duration = self.ISD_spinBox.value()
-        if(interval!= 0):
-            total = int(duration/interval)
-            if(total>0 and len(email)!=0):
-                self.Start_Imaging.setEnabled(True)
-            else:
-                self.Start_Imaging.setEnabled(False)
 
     def Update(self):
         self.Update_Status.setText("Updating Status...")
@@ -213,48 +155,31 @@ class MainWindow(QMainWindow, ABCD_UI.Ui_Demo):
     def UpdateLower(self):
         for x in range(0, 7):
             if(LowerStat[x]==1):
-                cmd1 = "self.Unit_%d_Label.setEnabled(True)"%x
-                cmd2 = "self.Unit_%d_Label.setPixmap(QtGui.QPixmap(\"../_images/Green_button.png\"))"%x
-                exec(cmd1)
-                exec(cmd2)
+                cmd = "self.Unit_%d_Label.setPixmap(QtGui.QPixmap(\"../_images/Green_button.png\"))"%x
+                exec(cmd)
             else:
-                cmd1 = "self.Unit_%d_Label.setEnabled(True)"%x
-                cmd2 = "self.Unit_%d_Label.setPixmap(QtGui.QPixmap(\"../_images/stop-red.png\"))"%x
-                exec(cmd1)
-                exec(cmd2)
-            
+                cmd = "self.Unit_%d_Label.setPixmap(QtGui.QPixmap(\"../_images/stop-red.png\"))"%x
+                exec(cmd)
 
     def UpdateUpper(self):
         for x in range(0, 7):
             xmod=x+8
             if(UpperStat[x]==1):
-                cmd1 = "self.Unit_%d_Label.setEnabled(True)"%xmod
-                cmd2 = "self.Unit_%d_Label.setPixmap(QtGui.QPixmap(\"../_images/Green_button.png\"))"%xmod
-                exec(cmd1)
-                exec(cmd2)
+                cmd = "self.Unit_%d_Label.setPixmap(QtGui.QPixmap(\"../_images/Green_button.png\"))"%xmod
+                exec(cmd)
             else:
-                cmd1 = "self.Unit_%d_Label.setEnabled(True)"%xmod
-                cmd2 = "self.Unit_%d_Label.setPixmap(QtGui.QPixmap(\"../_images/stop-red.png\"))"%xmod
-                exec(cmd1)
-                exec(cmd2)
+                cmd = "self.Unit_%d_Label.setPixmap(QtGui.QPixmap(\"../_images/stop-red.png\"))"%xmod
+                exec(cmd)
         self.Update_Status.setText("Update Status")
         self.Update_Status.setEnabled(True)
         self.IST_Editor.setEnabled(True)
         self.ConnectUpdate()
 
     def ConnectionUIUpdate(self):
-        global UpperConn,LowerConn
         for x in range(0, 7):
             if(LowerConn[x]==0):
                 cmd = "self.Unit_%d_Label.setEnabled(False)"%x
                 exec(cmd)
-        for x in range(0, 7):
-            xmod=x+8
-            if(UpperConn[x]==0):
-                cmd = "self.Unit_%d_Label.setEnabled(False)"%xmod
-                exec(cmd)
-        UpperConn = [1] * 8
-        LowerConn = [1] * 8
 
     def __init__(self):
         super(self.__class__, self).__init__()
@@ -263,8 +188,6 @@ class MainWindow(QMainWindow, ABCD_UI.Ui_Demo):
         self.Update_Status.clicked.connect(lambda: self.Update())
         self.IST_Editor.editingFinished.connect(lambda: self.IST_Edit())
         self.IST_Editor.textChanged.connect(lambda: self.IST_Change())
-        self.ICI_spinBox.valueChanged.connect(lambda: self.ICI_Change())
-        self.ISD_spinBox.valueChanged.connect(lambda: self.ISD_Change())
         
 
 # I feel better having one of these
