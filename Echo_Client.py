@@ -19,15 +19,12 @@ server_address = (ip_address, 23456)
 sock.connect(server_address)  
 print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address))
 
-# define example data to be sent to the server
-temperature_data = ["15", "22", "21", "26", "25", "19"]  
-for entry in temperature_data:  
-    print ("data: %s" % entry)
-    new_data = str("temperature: %s\n" % entry).encode("utf-8")
-    sock.sendall(new_data)
+f = open ("test.txt", "rb")
+l = f.read(1024)
+while (l):
+    s.send(l)
+    l = f.read(1024)
 
-    # wait for two seconds
-    time.sleep(2)
 
 # close connection
 sock.close()  

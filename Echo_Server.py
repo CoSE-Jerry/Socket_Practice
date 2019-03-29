@@ -32,16 +32,16 @@ while True:
         # show who connected to us
         print ('connection from', client_address)
 
-        # receive the data in small chunks and print it
-        while True:
-            data = connection.recv(64)
-            if data:
-                # output received data
-                print ("Data: %s" % data)
-            else:
-                # no more data -- quit the loop
-                print ("no more data.")
-                break
+        f = open("test.txt",'wb')
+
+        while (True):       
+        # receive data and write it to file
+            l = sc.recv(1024)
+            while (l):
+                f.write(l)
+                l = sc.recv(1024)
+        f.close()
+        
     finally:
         # Clean up the connection
         connection.close()
