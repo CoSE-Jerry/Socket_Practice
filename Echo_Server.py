@@ -44,7 +44,7 @@ while True:
                 i+=1
                 f.write(l)
                 l = connection.recv(16384)
-            print (i)
+                print (i)
             print (time.time()-st)
             time.sleep(10)
                 
