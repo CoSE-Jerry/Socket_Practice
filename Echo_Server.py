@@ -45,11 +45,9 @@ while True:
                 f.write(l)
                 l = connection.recv(8192)
                 print (i)
-            
-            print (time.time()-st)
-            
-                
-        f.close()
+            print (int(time.time()-st))
+            f.close()
+        
         
     finally:
         # Clean up the connection
