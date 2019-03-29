@@ -11,8 +11,7 @@ local_hostname = socket.gethostname()
 local_fqdn = socket.getfqdn()
 
 # get the according IP address
-ip_address = socket.gethostbyname(local_hostname)
-
+ip_address = "10.0.5.1"
 # output hostname, domain name and IP address
 print ("working on %s (%s) with %s" % (local_hostname, local_fqdn, ip_address))
 

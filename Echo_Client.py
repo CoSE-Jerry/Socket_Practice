@@ -12,7 +12,7 @@ local_hostname = socket.gethostname()
 local_fqdn = socket.getfqdn()
 
 # get the according IP address
-ip_address = socket.gethostbyname(local_hostname)
+ip_address = "10.0.5.1"
 
 # bind the socket to the port 23456, and connect
 server_address = (ip_address, 23456)  
