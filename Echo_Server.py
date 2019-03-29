@@ -40,7 +40,7 @@ while True:
             i = 0
             while (l):
                 print (i)
-                i++
+                i+=1
                 f.write(l)
                 l = connection.recv(1024)
                 
