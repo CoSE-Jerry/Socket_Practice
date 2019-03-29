@@ -1,31 +1,48 @@
-#!/usr/bin/env python3
-
+# load additional Python module
 import socket
 
-HOST = ''  # Standard loopback interface address (localhost)
-PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
+# create TCP/IP socket
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-def setupServer():
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    print("Socket created.")
+# retrieve local hostname
+local_hostname = socket.gethostname()
+
+# get fully qualified hostname
+local_fqdn = socket.getfqdn()
+
+# get the according IP address
+ip_address = socket.gethostbyname(local_hostname)
+
+# output hostname, domain name and IP address
+print ("working on %s (%s) with %s" % (local_hostname, local_fqdn, ip_address))
+
+# bind the socket to the port 23456
+server_address = (ip_address, 23456)  
+print ('starting up on %s port %s' % server_address)  
+sock.bind(server_address)
+
+# listen for incoming connections (server mode) with one connection at a time
+sock.listen(1)
+
+while True:  
+    # wait for a connection
+    print ('waiting for a connection')
+    connection, client_address = sock.accept()
+
     try:
-        s.bind((HOST, PORT))
-    except socket.error as msg:
-        print(msg)
-    print("Socket bind comlete.")
-    return s
+        # show who connected to us
+        print ('connection from', client_address)
 
-def setupConnection():
-    s.listen(1) # Allows one connection at a time.
-    conn, address = s.accept()
-    return conn
-
-
-s = setupServer()
-while True:
-    try:
-        conn = setupConnection()
-        #dataTransfer(conn)
-        print("con")
-    except socket.error as msg:
-        print("disconnect")
+        # receive the data in small chunks and print it
+        while True:
+            data = connection.recv(64)
+            if data:
+                # output received data
+                print ("Data: %s" % data)
+            else:
+                # no more data -- quit the loop
+                print ("no more data.")
+                break
+    finally:
+        # Clean up the connection
+        connection.close()
