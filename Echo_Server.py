@@ -36,10 +36,10 @@ while True:
 
         while (True):       
         # receive data and write it to file
-            l = sock.recv(1024)
+            l = connection.recv(1024)
             while (l):
                 f.write(l)
-                l = sock.recv(1024)
+                l = connection.recv(1024)
         f.close()
         
     finally:
