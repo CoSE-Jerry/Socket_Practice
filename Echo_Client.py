@@ -22,7 +22,7 @@ print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address
 f = open ("test.txt", "rb")
 l = f.read(1024)
 while (l):
-    s.send(l)
+    sock.send(l)
     l = f.read(1024)
 
 
