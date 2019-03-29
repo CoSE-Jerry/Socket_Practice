@@ -20,10 +20,10 @@ sock.connect(server_address)
 print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address))
 
 f = open ("trans.jpg", "rb")
-l = f.read(16384)
+l = f.read(1024)
 while (l):
     sock.send(l)
-    l = f.read(16384)
+    l = f.read(1024)
 
 
 # close connection
