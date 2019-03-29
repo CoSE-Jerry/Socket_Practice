@@ -19,7 +19,7 @@ server_address = (ip_address, 23456)
 sock.connect(server_address)  
 print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address))
 
-f = open ("test.txt", "rb")
+f = open ("trans.jpg", "rb")
 l = f.read(1024)
 while (l):
     sock.send(l)

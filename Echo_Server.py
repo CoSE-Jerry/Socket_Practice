@@ -32,7 +32,7 @@ while True:
         # show who connected to us
         print ('connection from', client_address)
 
-        f = open("test.txt",'wb')
+        f = open("recv.jpg",'wb')
 
         while (True):       
         # receive data and write it to file
