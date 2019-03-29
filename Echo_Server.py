@@ -37,9 +37,13 @@ while True:
         while (True):       
         # receive data and write it to file
             l = connection.recv(1024)
+            i = 0
             while (l):
+                print (i)
+                i++
                 f.write(l)
                 l = connection.recv(1024)
+                
         f.close()
         
     finally:
