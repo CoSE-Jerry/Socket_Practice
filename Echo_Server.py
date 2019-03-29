@@ -1,5 +1,6 @@
 # load additional Python module
 import socket
+import time
 
 # create TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,13 +37,16 @@ while True:
 
         while (True):       
         # receive data and write it to file
-            l = connection.recv(1024)
+            l = connection.recv(8192)
             i = 0
+            st = time.time()
             while (l):
-                print (i)
                 i+=1
                 f.write(l)
-                l = connection.recv(1024)
+                l = connection.recv(8192)
+            print (i)
+            print (time.time()-st)
+            
                 
         f.close()
         
