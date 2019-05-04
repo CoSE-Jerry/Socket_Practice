@@ -42,8 +42,10 @@ while True:
                 i+=1
                 f.write(l)
                 l = connection.recv(16384)
-                print (i)    
-            f.close()
+                print (i)
+                
+        f.close()
+        connection.close()
         
     finally:
         # Clean up the connection
