@@ -11,7 +11,7 @@ local_hostname = socket.gethostname()
 local_fqdn = socket.getfqdn()
 
 # get the according IP address
-ip_address = "10.0.5.1"
+ip_address = "10.0.5.2"
 # output hostname, domain name and IP address
 print ("working on %s (%s) with %s" % (local_hostname, local_fqdn, ip_address))
 
@@ -28,7 +28,14 @@ while True:
     print ('waiting for a connection')
     connection, client_address = sock.accept()
 
-    try:
+    while True:
+        CMD = connection.recv(1024)
+        print(CMD)
+        if not data:
+            break
+    connection.close()
+
+    """try:
         # show who connected to us
         print ('connection from', client_address)
 
@@ -47,4 +54,4 @@ while True:
         
     finally:
         # Clean up the connection
-        connection.close()
+        connection.close()"""
