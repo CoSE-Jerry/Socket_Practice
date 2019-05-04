@@ -1,5 +1,6 @@
 # load additional Python module
 import socket
+import sys
 
 # create TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -35,9 +36,10 @@ while True:
         f = open("recv.jpg",'wb')      
         l = connection.recv(16384)
         print ("Receiving Data")
-        while (l>1024):
+        while (sys.getsizeof(l)>1024):
             f.write(l)
             l = connection.recv(16384)
+            print (sys.getsizeof(l))
         print ("Receiving Done")            
         f.close()
         
