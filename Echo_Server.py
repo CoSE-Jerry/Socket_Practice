@@ -1,6 +1,5 @@
 # load additional Python module
 import socket
-import sys
 
 # create TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,15 +32,18 @@ while True:
         # show who connected to us
         print ('connection from', client_address)
 
-        f = open("recv.jpg",'wb')      
-        l = connection.recv(16384)
-        print ("Receiving Data")
-        while (sys.getsizeof(l)>10):
-            f.write(l)
+        f = open("recv.jpg",'wb')
+
+        while (True):       
+        # receive data and write it to file
             l = connection.recv(16384)
-            print (sys.getsizeof(l))
-        print ("Receiving Done")            
+            print ("Receiving Data")
+            if not l:
+                break
+            f.write(l)
+        print ("Receiving Done")
         f.close()
+        
         
     finally:
         # Clean up the connection
