@@ -36,7 +36,7 @@ while True:
         f = open("recv.jpg",'wb')      
         l = connection.recv(16384)
         print ("Receiving Data")
-        while (sys.getsizeof(l)>1024):
+        while (sys.getsizeof(l)>10):
             f.write(l)
             l = connection.recv(16384)
             print (sys.getsizeof(l))
