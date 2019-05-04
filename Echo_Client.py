@@ -20,7 +20,7 @@ sock.connect(server_address)
 print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address))
 
 while True:
-    sock.sendall('hello')
+    sock.sendall("hello".encode())
 
 """f = open ("trans.jpg", "rb")
 l = f.read(1024)
