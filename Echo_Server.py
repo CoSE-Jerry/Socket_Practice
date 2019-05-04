@@ -38,14 +38,18 @@ while True:
         # receive data and write it to file
             l = connection.recv(16384)
             i = 0
+            print ("Receiving Data")
             while (l):
                 i+=1
                 f.write(l)
                 l = connection.recv(16384)
-                print (i)
+            print ("Receiving Done")
+                
                 
         f.close()
         connection.close()
+        print ("connection closed")
+        
         
     finally:
         # Clean up the connection
