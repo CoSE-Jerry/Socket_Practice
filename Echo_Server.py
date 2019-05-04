@@ -31,7 +31,7 @@ while True:
     while True:
         CMD = connection.recv(1024)
         print(CMD)
-        if not data:
+        if not CMD:
             break
     connection.close()
 

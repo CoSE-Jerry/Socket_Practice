@@ -21,7 +21,7 @@ print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address
 
 while True:
     data = input("Enter the data to be sent : ")
-    s.sendall(data)
+    sock.sendall(data)
 
 """f = open ("trans.jpg", "rb")
 l = f.read(1024)
