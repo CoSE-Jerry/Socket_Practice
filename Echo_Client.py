@@ -44,7 +44,6 @@ while True:
             while True:
                 print('receiving data...')
                 data = sock.recv(1024)
-                print('data=%s', (data))
                 if not data:
                     break
         # write data to a file

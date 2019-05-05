@@ -48,6 +48,7 @@ while True:
                 l = f.read(1024)
             f.close()
             print("reading done")
+            break
         elif(CMD=='Q'):
             break
         else:
