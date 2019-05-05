@@ -22,7 +22,7 @@ print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address
 while True:
     data = input("Enter the data to be sent : ")
     sock.sendall(data.encode())
-    if(data == 'A')
+    if(data == 'A'):
         print ('connection from', client_address)
         f = open("recv.jpg",'wb')
         
