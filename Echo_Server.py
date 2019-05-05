@@ -1,5 +1,7 @@
 # load additional Python module
 import socket
+from time import sleep
+from picamera import PiCamera
 
 # create TCP/IP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -35,7 +37,11 @@ while True:
             break
         
         if(CMD=='A'):
-            f = open ("trans.jpg", "rb")
+            camera = PiCamera()
+            camera.resolution = (1024, 768)
+            sleep(2)
+            camera.capture('foo.jpg')
+            f = open ("foo.jpg", "rb")
             l = f.read(1024)
             while (l):
                 connection.send(l)

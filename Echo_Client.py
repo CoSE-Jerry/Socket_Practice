@@ -32,8 +32,8 @@ while True:
             if not l:
                 break
             f.write(l)
-        print ("Receiving Done")
-        f.close()
+    print ("Receiving Done")
+    f.close()
 
 """f = open ("trans.jpg", "rb")
 l = f.read(1024)
