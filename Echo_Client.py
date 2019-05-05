@@ -20,10 +20,10 @@ sock.connect(server_address)
 print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address))
 
 while True:
-    data = input("Enter the data to be sent : ")
-    sock.sendall(data.encode())
-    if(data == 'A'):
-        f = open("recv.jpg",'wb')
+    datas = input("Enter the data to be sent : ")
+    sock.sendall(datas.encode())
+    if(datas == 'A'):
+        '''f = open("recv.jpg",'wb')
 
         l = sock.recv(1024)
         i=0
@@ -34,7 +34,30 @@ while True:
             print (i)
             i+=1
         print ("Receiving Done")
-        f.close()
+        f.close()'''
+
+
+
+
+        with open('recv.jpg', 'wb') as f:
+            print('file opened')
+            while True:
+                print('receiving data...')
+                data = sock.recv(1024)
+                print('data=%s', (data))
+                if not data:
+                break
+        # write data to a file
+                f.write(data)
+
+f.close()
+
+
+
+
+
+
+
 
 """f = open ("trans.jpg", "rb")
 l = f.read(1024)
