@@ -27,7 +27,7 @@ while True:
         
         while (True):       
         # receive data and write it to file
-            l = connection.recv(16384)
+            l = sock.recv(16384)
             print ("Receiving Data")
             if not l:
                 break
