@@ -30,9 +30,13 @@ while True:
 
     while True:
         CMD = connection.recv(1024)
-        print(CMD)
+        
         if not CMD:
             break
+        if(CMD=='A'):
+            print("got A")
+        else:
+            print(CMD)
     connection.close()
 
     """try:
