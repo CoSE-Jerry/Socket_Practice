@@ -35,9 +35,13 @@ while True:
             break
         if(CMD=='A'):
             print("got A")
+        elif(CMD=='Q'):
+            break
         else:
             print(CMD)
     connection.close()
+    if(CMD=='Q'):
+        break
 
     """try:
         # show who connected to us
