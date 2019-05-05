@@ -33,8 +33,8 @@ while True:
     while True:
         CMD = connection.recv(1024).decode("utf-8")
         
-        if not CMD:
-            break
+        '''if not CMD:
+            break'''
         
         if(CMD=='A'):
             camera = PiCamera()
