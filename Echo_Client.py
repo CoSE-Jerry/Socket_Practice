@@ -23,7 +23,6 @@ while True:
     data = input("Enter the data to be sent : ")
     sock.sendall(data.encode())
     if(data == 'A'):
-        print ('connection from', client_address)
         f = open("recv.jpg",'wb')
         
         while (True):       
