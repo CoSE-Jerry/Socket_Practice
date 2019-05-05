@@ -29,7 +29,7 @@ while True:
     connection, client_address = sock.accept()
 
     while True:
-        CMD = connection.recv(1024)
+        CMD = connection.recv(1024).decode("utf-8")
         
         if not CMD:
             break
