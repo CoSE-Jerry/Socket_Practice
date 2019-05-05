@@ -38,7 +38,7 @@ while True:
         
         if(CMD=='A'):
             camera = PiCamera()
-            camera.resolution = (1024, 768)
+            camera.resolution = (350, 350)
             sleep(2)
             camera.capture('foo.jpg')
             f = open ("foo.jpg", "rb")
