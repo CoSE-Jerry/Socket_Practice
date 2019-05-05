@@ -47,6 +47,7 @@ while True:
                 connection.send(l)
                 l = f.read(1024)
             f.close()
+            print("reading done")
         elif(CMD=='Q'):
             break
         else:

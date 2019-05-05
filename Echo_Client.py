@@ -25,12 +25,14 @@ while True:
     if(data == 'A'):
         f = open("recv.jpg",'wb')
 
-        l = sock.recv(16384)
+        l = sock.recv(1024)
+        i=0
         while (l):       
         # receive data and write it to file
             f.write(l)
-            l = sock.recv(16384)
-            print ("Writing")
+            l = sock.recv(1024)
+            print (i)
+            i+=1
         print ("Receiving Done")
         f.close()
 
