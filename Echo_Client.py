@@ -22,6 +22,19 @@ print ("connecting to %s (%s) with %s" % (local_hostname, local_fqdn, ip_address
 while True:
     data = input("Enter the data to be sent : ")
     sock.sendall(data.encode())
+    if(data == 'A')
+        print ('connection from', client_address)
+        f = open("recv.jpg",'wb')
+        
+        while (True):       
+        # receive data and write it to file
+            l = connection.recv(16384)
+            print ("Receiving Data")
+            if not l:
+                break
+            f.write(l)
+        print ("Receiving Done")
+        f.close()
 
 """f = open ("trans.jpg", "rb")
 l = f.read(1024)
