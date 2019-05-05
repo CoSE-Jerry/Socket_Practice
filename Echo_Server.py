@@ -38,7 +38,7 @@ while True:
             f = open ("trans.jpg", "rb")
             l = f.read(1024)
             while (l):
-                sock.send(l)
+                connection.send(l)
                 l = f.read(1024)
             f.close()
         elif(CMD=='Q'):
