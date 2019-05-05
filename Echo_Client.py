@@ -24,14 +24,13 @@ while True:
     sock.sendall(data.encode())
     if(data == 'A'):
         f = open("recv.jpg",'wb')
-        
-        while (True):       
+
+        l = sock.recv(16384)
+        while (l):       
         # receive data and write it to file
-            l = sock.recv(16384)
-            print ("Receiving Data")
-            if not l:
-                break
             f.write(l)
+            l = sock.recv(16384)
+            print ("Writing")
         print ("Receiving Done")
         f.close()
 
