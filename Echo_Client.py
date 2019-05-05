@@ -46,7 +46,7 @@ while True:
                 data = sock.recv(1024)
                 print('data=%s', (data))
                 if not data:
-                break
+                    break
         # write data to a file
                 f.write(data)
 
